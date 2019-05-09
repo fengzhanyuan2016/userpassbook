@@ -1,6 +1,7 @@
 package com.bmw.passbook.utils;
 
 import com.bmw.passbook.dto.FeedBack;
+import com.bmw.passbook.dto.GainPassTemplateRequest;
 import com.bmw.passbook.dto.PassTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.DigestUtils;
@@ -13,6 +14,11 @@ public class RowKeyGenUtil {
         String rowkey = DigestUtils.md5DigestAsHex(passinfo.getBytes());
         log.info("GenPassTemplateRowKey:{},{}",passinfo,rowkey);
         return rowkey;
+    }
+
+    public static String genPassRowKey(GainPassTemplateRequest request){
+        return new StringBuilder(String.valueOf(request.getUserId())).reverse().toString()+
+                (Long.MAX_VALUE-System.currentTimeMillis())+genPassTemplateRowKey(request.getPassTemplate());
     }
 
     public static String genFeedbackRowKey(FeedBack feedBack){

@@ -26,7 +26,8 @@ public class PassTemplateConsumer {
             var pt = JSON.parseObject(passtemplate, PassTemplate.class);
             log.info("DropPassTemplateToHBase:{}",_service.dropPassTemplateToHBase(pt));
 
-        }catch (Exception ex){
+        }
+        catch (Exception ex){
             log.error("parse passtemplate error:{}",ex.getMessage());
             return;
         }
