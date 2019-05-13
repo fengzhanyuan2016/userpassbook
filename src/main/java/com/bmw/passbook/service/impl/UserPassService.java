@@ -71,8 +71,6 @@ public class UserPassService implements IUserPassService {
             scan.setFilter(new SingleColumnValueFilter(Constants.PassTable.FAMILY_I.getBytes(),Constants.PassTable.CON_DATE.getBytes(),compareOption,Bytes.toBytes("-1")));
         }
 
-
-
         return null;
     }
 
