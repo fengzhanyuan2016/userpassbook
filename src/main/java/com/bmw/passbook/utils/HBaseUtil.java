@@ -22,11 +22,23 @@ public class HBaseUtil {
         configuration.set("log4j.logger.org.apache.hadoop.hbase", "WARN");
     }
 
+
     public static Admin getAdmin() {
         try {
-            Connection connection = ConnectionFactory.createConnection(configuration);
+            if(null ==connection){
+               connection = getConnection();
+            }
             Admin admin = connection.getAdmin();
             return admin;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public static Connection getConnection() {
+        try {
+            connection = ConnectionFactory.createConnection(configuration);
+            return connection;
         } catch (Exception e) {
             return null;
         }
