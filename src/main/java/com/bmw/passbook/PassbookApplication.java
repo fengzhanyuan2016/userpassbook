@@ -8,5 +8,4 @@ public class PassbookApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PassbookApplication.class, args);
 	}
-
 }

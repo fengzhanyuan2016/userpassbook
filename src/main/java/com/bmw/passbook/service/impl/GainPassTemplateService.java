@@ -13,6 +13,8 @@ import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Put;
 import org.apache.hadoop.hbase.util.Bytes;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Service;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -20,6 +22,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Date;
 
 @Slf4j
+@Service
 public class GainPassTemplateService implements IGainPassTemplateService {
     private StringRedisTemplate _redisTemplate;
     public GainPassTemplateService(StringRedisTemplate redisTemplate){

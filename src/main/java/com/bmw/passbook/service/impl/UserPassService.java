@@ -12,18 +12,22 @@ import com.bmw.passbook.mapper.PassTemplateRowMapper;
 import com.bmw.passbook.repository.MerchantRepository;
 import com.bmw.passbook.service.IUserPassService;
 import com.bmw.passbook.utils.HBaseUtil;
+import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.filter.*;
 import org.apache.hadoop.hbase.util.Bytes;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
+@Service
 public class UserPassService implements IUserPassService {
 
     private MerchantRepository _merchantRepository;

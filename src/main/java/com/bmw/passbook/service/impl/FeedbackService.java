@@ -7,14 +7,18 @@ import com.bmw.passbook.mapper.FeedbackRowMapper;
 import com.bmw.passbook.service.IFeedbackService;
 import com.bmw.passbook.utils.HBaseUtil;
 import com.bmw.passbook.utils.RowKeyGenUtil;
+import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.apache.hadoop.hbase.client.Result;
+import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Slf4j
+@Service
 public class FeedbackService implements IFeedbackService {
 
     @Override
