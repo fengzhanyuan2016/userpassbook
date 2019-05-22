@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
+
+/**
+ * 从kafka接收优惠券模板并存储的Hbase中
+ */
 @Slf4j
 @Service
 public class HBasePassService implements IHBasePassService {

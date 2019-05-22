@@ -66,7 +66,7 @@ public class PassbookController {
     @ResponseBody
     @PostMapping("userusepass")
     Response userUsePass(Pass pass) throws Exception{
-        LogGenerator.genLog(_request,pass.getUserId(), LogConstants.ActionName.USER_USED_PASS_INFO,null);
+        LogGenerator.genLog(_request,pass.getUserId(), LogConstants.ActionName.USER_USE_PASS,null);
         return _userPassService.userUsePass(pass);
     }
 
@@ -104,7 +104,7 @@ public class PassbookController {
     @ResponseBody
     @PostMapping("/createfeedback")
     Response createFeedback(FeedBack feedBack){
-        LogGenerator.genLog(_request,feedBack.getUserId(), LogConstants.ActionName.GAIN_PASS_TEMPLATE,feedBack);
+        LogGenerator.genLog(_request,feedBack.getUserId(), LogConstants.ActionName.CREATE_FEEDBACK,feedBack);
         return _feedbackService.createFeedback(feedBack);
     }
 
