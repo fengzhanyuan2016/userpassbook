@@ -1,17 +1,17 @@
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/passbook
+    url: jdbc:mysql://192.168.31.207:3306/passbook
     password: root
     username: root
   kafka:
     bootstrap-servers:
-      - 192.168.2.15:9092
+      - 192.168.31.207:9092
     consumer:
       group-id: passbook
     listener:
       concurrency: 4
   redis:
-    host: 192.168.2.15
+    host: 192.168.31.207
     port: 6379
 server:
   port: 9528

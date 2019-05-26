@@ -75,9 +75,11 @@ public class HBaseUtil {
         TableName tableName = TableName.valueOf(table);
         try{
             Table table1 = admin.getConnection().getTable(TableName.valueOf(table));
+            /*
             if(table1.exists(new Get(Bytes.toBytes(rowkey)))){
                 return;
             }
+            */
             HTableDescriptor tableDescriptor = table1.getTableDescriptor();
             HColumnDescriptor[] columnFamilies = tableDescriptor.getColumnFamilies();
             Put put = new Put(Bytes.toBytes(rowkey));

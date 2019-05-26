@@ -4,3 +4,10 @@ create 'pb:pass',{NAME=>'i',VERSIONS=>'3',TTL=>'2147483647',BLOOMFILTER=>'ROW'}
 create 'pb:passtemplate',{NAME=>'b',VERSIONS=>'3',TTL=>'2147483647',BLOOMFILTER=>'ROW'},{NAME=>'c',VERSIONS=>'3',TTL=>'2147483647',BLOOMFILTER=>'ROW'}
 create 'pb:feedback',{NAME=>'i',VERSIONS=>'3',TTL=>'2147483647',BLOOMFILTER=>'ROW'}
 
+
+
+docker run --name=mysql -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=passbook -p 3306:3306 -d mysql:5.6
+docker run -d --name=redis -p 6379:6379 redis
+docker run -d --name kafka -p 3030:3030 -p 8081-8083:8081-8083 \
+       -p 9581-9585:9581-9585 -p 9092:9092 -e ADV_HOST=192.168.31.207 \
+       landoop/fast-data-dev

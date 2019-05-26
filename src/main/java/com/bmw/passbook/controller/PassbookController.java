@@ -1,19 +1,17 @@
 package com.bmw.passbook.controller;
 
-import com.bmw.passbook.dto.FeedBack;
-import com.bmw.passbook.dto.GainPassTemplateRequest;
-import com.bmw.passbook.dto.Pass;
-import com.bmw.passbook.dto.Response;
+import com.bmw.passbook.dto.*;
 import com.bmw.passbook.log.LogConstants;
 import com.bmw.passbook.log.LogGenerator;
-import com.bmw.passbook.service.IFeedbackService;
-import com.bmw.passbook.service.IGainPassTemplateService;
-import com.bmw.passbook.service.IInventoryService;
-import com.bmw.passbook.service.IUserPassService;
+import com.bmw.passbook.service.*;
+import com.bmw.passbook.service.impl.HBasePassService;
 import lombok.extern.slf4j.Slf4j;
+import lombok.var;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Calendar;
+import java.util.Date;
 
 @Slf4j
 @RestController
@@ -24,11 +22,13 @@ public class PassbookController {
     private IGainPassTemplateService _gainPassTemplateService;
     private IFeedbackService _feedbackService;
     private HttpServletRequest _request;
-    public PassbookController(IUserPassService userPassService, IInventoryService iInventoryService, IGainPassTemplateService gainPassTemplateService, IFeedbackService feedbackService, HttpServletRequest request){
+    private IHBasePassService _hbasePassService;
+    public PassbookController(IUserPassService userPassService,IHBasePassService hBasePassService, IInventoryService iInventoryService, IGainPassTemplateService gainPassTemplateService, IFeedbackService feedbackService, HttpServletRequest request){
         _userPassService = userPassService;
         _iInventoryService = iInventoryService;
         _feedbackService = feedbackService;
         _gainPassTemplateService = gainPassTemplateService;
+        _hbasePassService = hBasePassService;
         _request = request;
     }
 
@@ -90,7 +90,7 @@ public class PassbookController {
      * @throws Exception
      */
     @ResponseBody
-    @GetMapping("/gainpasstemplate")
+    @PostMapping("/gainpasstemplate")
     Response gainPassTemplate(@RequestBody GainPassTemplateRequest request) throws Exception{
         LogGenerator.genLog(_request,request.getUserId(), LogConstants.ActionName.GAIN_PASS_TEMPLATE,request);
         return _gainPassTemplateService.gainPassTemplate(request);
@@ -119,6 +119,35 @@ public class PassbookController {
         LogGenerator.genLog(_request,userId,LogConstants.ActionName.GET_FEEDBACK,null);
         return _feedbackService.getFeedback(userId);
     }
+
+
+    /**
+     * 模拟商户分发优惠券
+     * @return
+     */
+    @ResponseBody
+    @PostMapping("/dropTemplate")
+    Response dropTemplate(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        PassTemplate passTemplate = new PassTemplate();
+        passTemplate.setBackground(2);
+        passTemplate.setDesc("描述");
+        passTemplate.setStart(new Date());
+        passTemplate.setEnd(calendar.getTime());
+        passTemplate.setHasToken(false);
+        passTemplate.setLimit(100L);
+        passTemplate.setId(1);
+        passTemplate.setSummary("简介");
+        passTemplate.setTitle("标题");
+        boolean result = _hbasePassService.dropPassTemplateToHBase(passTemplate);
+        return new Response().SUCCESS(result);
+
+
+    }
+
+
 
 
 }

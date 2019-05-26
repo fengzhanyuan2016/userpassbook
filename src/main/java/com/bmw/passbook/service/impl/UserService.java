@@ -34,8 +34,8 @@ public class UserService implements IUserService {
         HBaseUtil.add(Constants.UserTable.TABLE_NAME, userId.toString(),Constants.UserTable.FAMILY_B,b_map);
 
         var o_map = new HashMap<String,String>();
-        b_map.put(Constants.UserTable.PHONE,user.getOtherInfo().getPhone());
-        b_map.put(Constants.UserTable.ADDRESS,user.getOtherInfo().getAddress());
+        o_map.put(Constants.UserTable.PHONE,user.getOtherInfo().getPhone());
+        o_map.put(Constants.UserTable.ADDRESS,user.getOtherInfo().getAddress());
         HBaseUtil.add(Constants.UserTable.TABLE_NAME, userId.toString(),Constants.UserTable.FAMILY_O,o_map);
         return new Response(user);
     }
