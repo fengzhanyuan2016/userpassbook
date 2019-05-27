@@ -11,12 +11,9 @@ public class UserRowMapper {
     private static byte[] NAME = Constants.UserTable.NAME.getBytes();
     private static byte[] AGE = Constants.UserTable.AGE.getBytes();
     private static byte[] SEX = Constants.UserTable.SEX.getBytes();
-
     private static byte[] FAMILY_O = Constants.UserTable.FAMILY_O.getBytes();
     private static byte[] PHONE = Constants.UserTable.PHONE.getBytes();
     private static byte[] ADDRESS = Constants.UserTable.ADDRESS.getBytes();
-
-
 
     public User map(Result result){
         if(result.isEmpty()){

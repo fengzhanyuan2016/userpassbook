@@ -9,6 +9,7 @@ import com.bmw.passbook.service.IInventoryService;
 import com.bmw.passbook.service.IUserPassService;
 import com.bmw.passbook.utils.HBaseUtil;
 import com.bmw.passbook.utils.RowKeyGenUtil;
+import lombok.extern.slf4j.Slf4j;
 import lombok.var;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.Scan;
@@ -17,10 +18,13 @@ import org.apache.hadoop.hbase.filter.FilterList;
 import org.apache.hadoop.hbase.filter.LongComparator;
 import org.apache.hadoop.hbase.filter.SingleColumnValueFilter;
 import org.apache.hadoop.hbase.util.Bytes;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
+@Service
 public class InventoryService implements IInventoryService {
 
     private final MerchantRepository _merchantRepository;

@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
+
+/**
+ * 从kafka接收优惠券模板并存储的Hbase中
+ */
 @Slf4j
 @Service
 public class HBasePassService implements IHBasePassService {
@@ -31,9 +35,9 @@ public class HBasePassService implements IHBasePassService {
         b_map.put(Constants.PassTemplateTable.BACKGROUND,template.getBackground().toString());
         HBaseUtil.add(Constants.PassTemplateTable.TABLE_NAME,rowKey,Constants.PassTemplateTable.FAMILY_B,b_map);
         var c_map = new HashMap<String,String>();
-        b_map.put(Constants.PassTemplateTable.LIMIT,template.getLimit().toString());
-        b_map.put(Constants.PassTemplateTable.START,template.getStart().toString());
-        b_map.put(Constants.PassTemplateTable.END,template.getEnd().toString());
+        c_map.put(Constants.PassTemplateTable.LIMIT,template.getLimit().toString());
+        c_map.put(Constants.PassTemplateTable.START,template.getStart().toString());
+        c_map.put(Constants.PassTemplateTable.END,template.getEnd().toString());
         HBaseUtil.add(Constants.PassTemplateTable.TABLE_NAME,rowKey,Constants.PassTemplateTable.FAMILY_C,c_map);
         return true;
     }
