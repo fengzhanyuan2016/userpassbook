@@ -18,6 +18,7 @@ public class GainPassTemplateService implements IGainPassTemplateService {
      * @return
      */
     private boolean addPassForUser(GainPassTemplateRequest request,Integer merchantId,String passTemplateId){
+
         return true;
     }
 
