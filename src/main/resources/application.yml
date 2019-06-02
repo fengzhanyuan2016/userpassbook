@@ -4,12 +4,11 @@ spring:
     password: root
     username: root
   kafka:
-    bootstrap-servers:
-      - 192.168.31.207:9092
     consumer:
-      group-id: passbook
-    listener:
-      concurrency: 4
+      group-id: test-consumer-group
+      enable-auto-commit: true
+      auto-offset-reset: earliest
+      bootstrap-servers: 192.168.31.207:9092
   redis:
     host: 192.168.31.207
     port: 6379

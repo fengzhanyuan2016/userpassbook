@@ -17,7 +17,7 @@ public class HBaseUtil {
 
     static {
         configuration = HBaseConfiguration.create();
-        configuration.set("hbase.zookeeper.quorum", "myhbase");
+        configuration.set("hbase.zookeeper.quorum", "master");
         configuration.set("hbase.zookeeper.property.clientPort", "2181");
         configuration.set("log4j.logger.org.apache.hadoop.hbase", "WARN");
     }
